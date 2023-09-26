@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "fr.mns.java.rest.model")
 @ComponentScan(basePackages = "fr.mns.java.rest.client")
 public class SpringRest3Application {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringRest3Application.class, args);
 	}

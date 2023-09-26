@@ -1,5 +1,6 @@
 package fr.mns.java.rest.dto;
 
+import fr.mns.java.rest.model.Person;
 import fr.mns.java.rest.model.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,14 +10,14 @@ import java.util.Date;
 
 public class CommentDTO {
     private Long id;
-    private User user;
+    private Person author;
     private String content;
     private Post post;
     private LocalDateTime date;
 
-    public CommentDTO(Long id, User user, String content, Post post, LocalDateTime date) {
+    public CommentDTO(Long id, Person author, String content, Post post, LocalDateTime date) {
         this.id = id;
-        this.user = user;
+        this.author = author;
         this.content = content;
         this.post = post;
         this.date = date;
@@ -34,12 +35,12 @@ public class CommentDTO {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Person getAuthor() {
+        return author;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAuthor(Person author) {
+        this.author = author;
     }
 
     public String getContent() {

@@ -54,7 +54,7 @@ public class CommentService {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setContent(comment.getContent());
-        commentDTO.setUser(comment.getAuthor());
+        commentDTO.setAuthor(comment.getAuthor());
         commentDTO.setDate(comment.getDate());
         commentDTO.setPost(comment.getPost());
         return commentDTO;
@@ -65,7 +65,7 @@ public class CommentService {
             Comment comment = new Comment();
             comment.setId(commentDTO.getId());
             comment.setContent(commentDTO.getContent());
-            comment.setAuthor(commentDTO.getUser());
+            comment.setAuthor(commentDTO.getAuthor());
             comment.setDate(commentDTO.getDate());
             comment.setPost(commentDTO.getPost());
             return comment;

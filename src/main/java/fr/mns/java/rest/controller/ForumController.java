@@ -6,11 +6,8 @@ import fr.mns.java.rest.service.CommentService;
 import fr.mns.java.rest.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 @RestController
 @RequestMapping("/forum")
 public class ForumController {
@@ -30,21 +27,21 @@ public class ForumController {
 	}
 
 	@PostMapping("/addPost")
-	public ResponseEntity<String> addPost(@ModelAttribute PostDTO postDTO) {
+	public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO) {
 		postService.addPost(postDTO);
-		return new ResponseEntity<>("Post added successfully", HttpStatus.CREATED);
+		return ResponseEntity.ok(postDTO);
 	}
 
 	@PostMapping("/editPost")
-	public ResponseEntity<String> editPost(@ModelAttribute PostDTO postDTO) {
+	public ResponseEntity<PostDTO> editPost(@RequestBody PostDTO postDTO) {
 		postService.editPost(postDTO);
-		return new ResponseEntity<>("Post edited successfully", HttpStatus.OK);
+		return ResponseEntity.ok(postDTO);
 	}
 
 	@PostMapping("/deletePost")
-	public ResponseEntity<String> deletePost(@RequestParam Long postId) {
-		postService.deletePost(postId);
-		return new ResponseEntity<>("Post deleted successfully", HttpStatus.OK);
+	public ResponseEntity<PostDTO> deletePost(@RequestBody PostDTO postDTO) {
+		postService.deletePost(postDTO.getId());
+		return ResponseEntity.ok(postDTO);
 	}
 
 	@PostMapping("/addComment")

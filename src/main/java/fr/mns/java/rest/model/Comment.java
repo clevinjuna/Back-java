@@ -1,32 +1,30 @@
 package fr.mns.java.rest.model;
 
 import fr.mns.java.rest.dto.PostDTO;
-import fr.mns.java.rest.dto.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@Entity
+@Table
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String content;
-    @Column
-    private User author;
+    @ManyToOne
+    private Person author;
 
     @Column
     private LocalDateTime date;
 
-    @Column
+    @ManyToOne
     private Post post;
 
 
-    public Comment(Long id, String content, User author, LocalDateTime date, Post post) {
+    public Comment(Long id, String content, Person author, LocalDateTime date, Post post) {
         this.id = id;
         this.content = content;
         this.author = author;
@@ -54,11 +52,11 @@ public class Comment {
         this.content = content;
     }
 
-    public User getAuthor() {
+    public Person getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Person author) {
         this.author = author;
     }
 

@@ -1,5 +1,6 @@
 package fr.mns.java.rest.dto;
 
+import fr.mns.java.rest.model.Person;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -9,11 +10,11 @@ import java.util.Date;
 public class PostDTO {
     private Long id;
     private String content;
-    private User author;
+    private Person author;
 
     private LocalDateTime date;
 
-    public PostDTO(Long id, String content, User author, LocalDateTime date) {
+    public PostDTO(Long id, String content, Person author, LocalDateTime date) {
         this.id = id;
         this.content = content;
         this.author = author;
@@ -40,11 +41,11 @@ public class PostDTO {
         this.content = content;
     }
 
-    public User getAuthor() {
+    public Person getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(Person author) {
         this.author = author;
     }
 

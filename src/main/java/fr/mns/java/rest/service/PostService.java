@@ -22,9 +22,8 @@ public class PostService {
 
     public List<PostDTO> getAllPosts() {
         List<Post> posts = postRepository.findAll();
-        return posts.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return posts.stream().map(this::convertToDTO).collect(Collectors.toList());
+        //return  postRepository.findAll();
     }
     public void addPost(PostDTO postCreateDTO) {
         Post post = convertToEntity(postCreateDTO);
