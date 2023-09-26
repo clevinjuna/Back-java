@@ -4,6 +4,7 @@ import fr.mns.java.rest.dto.CommentDTO;
 import fr.mns.java.rest.dto.PostDTO;
 import fr.mns.java.rest.service.CommentService;
 import fr.mns.java.rest.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/forum")
 public class ForumController {
-
+	@Autowired
 	private final PostService postService;
+	@Autowired
 	private final CommentService commentService;
 
 	public ForumController(PostService postService, CommentService commentService) {
