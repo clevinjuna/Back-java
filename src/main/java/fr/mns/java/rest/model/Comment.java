@@ -1,23 +1,26 @@
 package fr.mns.java.rest.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.mns.java.rest.dto.PostDTO;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table
-public class Comment {
+@Table(name = "comment")
+public class Comment implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="content", length=2047)
     private String content;
     @ManyToOne
+    @JoinColumn(name = "author_id")
     private Person author;
 
-    @Column
+    @Column(name = "date")
     private LocalDateTime date;
 
     @ManyToOne
@@ -32,10 +35,9 @@ public class Comment {
         this.post = post;
     }
 
-    public Comment() {
+    public Comment() {}
 
-    }
-
+    @JsonProperty("id")
     public Long getId() {
         return id;
     }
@@ -44,6 +46,7 @@ public class Comment {
         this.id = id;
     }
 
+    @JsonProperty("content")
     public String getContent() {
         return content;
     }
@@ -52,6 +55,7 @@ public class Comment {
         this.content = content;
     }
 
+    @JsonProperty("author")
     public Person getAuthor() {
         return author;
     }
@@ -60,6 +64,7 @@ public class Comment {
         this.author = author;
     }
 
+    @JsonProperty("date")
     public LocalDateTime getDate() {
         return date;
     }
@@ -68,6 +73,7 @@ public class Comment {
         this.date = date;
     }
 
+    @JsonProperty("post")
     public Post getPost() {
         return post;
     }

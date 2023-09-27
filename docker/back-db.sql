@@ -33,7 +33,7 @@ USE `back-java`;
 DROP TABLE IF EXISTS `city`;
 CREATE TABLE IF NOT EXISTS `city` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `postcode` int NOT NULL,
+  `post_code` int NOT NULL,
   `name` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `city` (
 -- Déchargement des données de la table `city`
 --
 
-INSERT INTO `city` (`id`, `postcode`, `name`, `country`) VALUES
+INSERT INTO `city` (`id`, `post_code`, `name`, `country`) VALUES
 (1, 57000, 'Metz', 'France'),
 (2, 75000, 'Paris', 'France');
 
@@ -58,16 +58,16 @@ CREATE TABLE IF NOT EXISTS `address` (
   `id` int NOT NULL AUTO_INCREMENT,
   `number` int NOT NULL,
   `street` varchar(255) NOT NULL,
-  `idcity` int DEFAULT NULL,
+  `id_city` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `idcity` (`idcity`)
+  KEY `id_city` (`id_city`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `address`
 --
 
-INSERT INTO `address` (`id`, `number`, `street`, `idcity`) VALUES
+INSERT INTO `address` (`id`, `number`, `street`, `id_city`) VALUES
 (1, 10, 'rue de la forêt', 1),
 (2, 17, 'rue du port', 2),
 (3, 22, 'rue des près', 3),
@@ -85,16 +85,18 @@ CREATE TABLE IF NOT EXISTS `person` (
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `birthdate` date NOT NULL,
-  `phoneNumber` varchar(20) NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
   `gender` int NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_address` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_address` (`id_address`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `person`
 --
 
-INSERT INTO `person` (`id`, `lastname`, `firstname`, `birthdate`, `phoneNumber`, `gender`) VALUES
+INSERT INTO `person` (`id`, `lastname`, `firstname`, `birthdate`, `phone_number`, `gender`) VALUES
 (1, 'Doe', 'John', '1990-12-12', '0601020304', 1),
 (2, 'Jane', 'John', '1990-10-01', '0601020305', 1),
 (3, 'Coilin', 'Marguerite', '1958-08-01', '0678954621', 0),
@@ -111,17 +113,17 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(2047) NOT NULL,
-  `authorId` int NOT NULL,
+  `author_id` int NOT NULL,
   `published` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `authorId` (`authorId`)
+  KEY `author_id` (`author_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `post`
 --
 
-INSERT INTO `post` (`id`, `content`, `authorId`, `published`) VALUES
+INSERT INTO `post` (`id`, `content`, `author_id`, `published`) VALUES
 (1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis eros congue, tincidunt neque id, eleifend ex. Nullam ut felis sit amet nulla tristique facilisis. Aliquam ut libero tincidunt, fringilla tortor rutrum, tincidunt lacus. Cras eget urna quis nisi dignissim lacinia sed in mauris. Aliquam blandit mi a ipsum pulvinar pretium. Sed condimentum, sapien id ullamcorper rutrum, neque lorem aliquet odio, quis accumsan ligula nisi at turpis.', 1, '1990-12-12'),
 (2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis eros congue, tincidunt neque id, eleifend ex. Nullam ut felis sit amet nulla tristique facilisis. Aliquam ut libero tincidunt, fringilla tortor rutrum, tincidunt lacus. Cras eget urna quis nisi dignissim lacinia sed in mauris. Aliquam blandit mi a ipsum pulvinar pretium. Sed condimentum, sapien id ullamcorper rutrum, neque lorem aliquet odio, quis accumsan ligula nisi at turpis.', 2, '1990-10-01');
 
@@ -135,19 +137,19 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(2047) NOT NULL,
-  `authorId` int NOT NULL,
+  `author_id` int NOT NULL,
   `published` date NOT NULL,
-  `postId` int NOT NULL,
+  `post_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `authorId` (`authorId`),
-  KEY `postId` (`postId`)
+  KEY `authorId` (`author_id`),
+  KEY `post_id` (`post_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
-INSERT INTO `comment` (`id`, `content`, `authorId`, `postId`, `published`) VALUES
+INSERT INTO `comment` (`id`, `content`, `author_id`, `post_id`, `published`) VALUES
 (1, 'CECI EST UN COMMENTAIRE 2', 1, 1, '1990-12-12'),
 (2, 'CECI EST UN COMMENTAIRE 2', 2, 2, '1990-10-01');
 

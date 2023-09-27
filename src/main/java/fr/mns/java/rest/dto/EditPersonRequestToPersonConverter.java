@@ -9,7 +9,7 @@ import fr.mns.java.rest.model.Person;
 public class EditPersonRequestToPersonConverter {
 	
 
-	public Person convert(Person p,EditPersonRequest request) {
+	public Person convert(Person p, EditPersonRequest request) {
 		p.setFirstName(request.getFirstName());
 		p.setLastName(request.getLastName());
 		p.setPhoneNumber(request.getPhoneNumber());
