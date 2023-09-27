@@ -1,5 +1,6 @@
 package fr.mns.java.rest.dto;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.mns.java.rest.model.Person;
 import fr.mns.java.rest.model.Post;
 import jakarta.persistence.Column;
@@ -65,5 +66,15 @@ public class CommentDTO {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public static CommentDTO fromJsonString(String jsonString) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(jsonString, CommentDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

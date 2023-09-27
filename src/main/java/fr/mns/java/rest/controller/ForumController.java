@@ -2,6 +2,7 @@ package fr.mns.java.rest.controller;
 
 import fr.mns.java.rest.dto.CommentDTO;
 import fr.mns.java.rest.dto.PostDTO;
+import fr.mns.java.rest.dto.PersonDTO;
 import fr.mns.java.rest.service.CommentService;
 import fr.mns.java.rest.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,8 @@ public class ForumController {
 	}
 
 	@PostMapping("/addPost")
-	public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO) {
+	public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO, @RequestBody String jsonRequest) {
+		postDTO = PostDTO.fromJsonString(jsonRequest);
 		postService.addPost(postDTO);
 		return ResponseEntity.ok(postDTO);
 	}

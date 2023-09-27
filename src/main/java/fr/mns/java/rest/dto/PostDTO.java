@@ -1,6 +1,8 @@
 package fr.mns.java.rest.dto;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.mns.java.rest.model.Person;
+import fr.mns.java.rest.model.Post;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -55,5 +57,14 @@ public class PostDTO {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+    public static PostDTO fromJsonString(String jsonString) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(jsonString, PostDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
